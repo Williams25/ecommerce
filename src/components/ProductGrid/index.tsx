@@ -14,27 +14,7 @@ export const ProductGrid = ({ products }: ProductGridProps) => {
         <motion.div className={styled.products}>
           <AnimatePresence>
             {products.map((product) => (
-              <motion.div
-                key={product.id}
-                layout
-                animate={{
-                  opacity: 1,
-                  scale: 1
-                }}
-                initial={{
-                  opacity: 0,
-                  scale: 0
-                }}
-                exit={{
-                  opacity: 0,
-                  scale: 0
-                }}
-                transition={{
-                  duration: 0.3
-                }}
-              >
-                <ProductCard {...product} />
-              </motion.div>
+              <ProductCard key={product.id} {...product} />
             ))}
           </AnimatePresence>
         </motion.div>
