@@ -34,8 +34,8 @@
     .imageBox {
       & img {
         transition: transform 200ms ease 0s;
-        width: 13.375rem;
-        height: 8.25rem;
+        width: 13.375rem !important;
+        height: 8.25rem !important;
         object-fit: contain;
         user-select: none;
       }
