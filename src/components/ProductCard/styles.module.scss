@@ -1,0 +1,97 @@
+.cardContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  max-width: 14.5rem;
+  max-height: 22rem;
+  min-width: 12.5rem;
+  min-height: 22rem;
+  background-color: var(--white);
+  border-radius: 0.55rem;
+  transition: box-shadow 200ms ease 0s;
+
+  &:hover {
+    box-shadow: rgba(40, 41, 61, 0.04) 0px 4px 8px,
+      rgba(96, 97, 112, 0.16) 0px 8px 16px;
+    .boxProduct {
+      .imageBox {
+        img {
+          transform: scale(1.025);
+        }
+      }
+    }
+  }
+
+  .boxProduct {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem;
+
+    .imageBox {
+      & img {
+        transition: transform 200ms ease 0s;
+        width: 13.375rem;
+        height: 8.25rem;
+        object-fit: contain;
+        user-select: none;
+      }
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+      padding: 0.5rem 0.2rem;
+
+      & h1 {
+        color: var(--filter-text);
+        font-size: 0.875rem;
+        line-height: 1.125rem;
+        font-weight: 600;
+        margin: 0.5rem 0 0;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -moz-box-orient: vertical;
+        height: 3.375rem;
+      }
+
+      & h2 {
+        margin: 0.5rem 0 0;
+        font-size: 1.5rem;
+        line-height: 2.125rem;
+        font-weight: 700;
+        color: var(--orange-text);
+      }
+
+      & .oldPriceCard {
+        margin: 0.5rem 0 0;
+        font-size: 0.75rem;
+        line-height: 1rem;
+        font-weight: 400;
+        height: 1rem;
+        text-decoration-line: line-through;
+        text-decoration-style: solid;
+        text-decoration-color: currentcolor;
+        text-decoration-thickness: revert;
+        color: var(--text-grey-weak);
+      }
+
+      & .priceTextCard {
+        margin: 0.5rem 0 0;
+        font-size: 0.75rem;
+        line-height: 1.125rem;
+        font-weight: 400;
+        height: 1.125rem;
+        color: var(--text-grey-weak);
+      }
+    }
+  }
+}
