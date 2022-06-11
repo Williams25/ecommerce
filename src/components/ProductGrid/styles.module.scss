@@ -1,0 +1,26 @@
+.sectionProducts {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 2rem 0;
+
+  .contentGridProduct {
+    padding: 0 1rem;
+    max-width: 79.375rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .products {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+  }
+}
