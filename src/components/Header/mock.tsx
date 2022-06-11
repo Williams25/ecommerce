@@ -10,7 +10,7 @@ import { AiOutlineSound } from "react-icons/ai";
 export const mockMenuItens: MenuItens[] = [
   {
     link: "/categories/Games",
-    title: "Games",
+    title: "Gamer",
     icone: <IoGameControllerOutline />
   },
   {
