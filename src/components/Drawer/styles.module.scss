@@ -1,0 +1,104 @@
+.contentDrawer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  animation: activeDrawerContent 0.5s forwards;
+
+  .drawer {
+    max-width: 25rem;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--blue);
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    animation: activeDrawer 0.5s forwards;
+  }
+}
+
+.contentDrawerDisabled {
+  &.drawer {
+    animation: disabledDrawer 0.5s forwards;
+  }
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: disabledDrawerContent 0.5s forwards;
+}
+
+.drawer {
+  box-shadow: rgba(40, 41, 61, 0.04) 0px 4px 8px,
+    rgba(96, 97, 112, 0.16) 0px 8px 16px;
+  padding: 0.5rem;
+  overflow: hidden;
+  .buttonClose {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    & button {
+      width: 2rem;
+      height: 2rem;
+      border: 0;
+      background-color: transparent;
+      transition: transform 200ms linear;
+
+      & svg {
+        font-size: 1.5rem;
+        color: var(--white);
+      }
+
+      &:hover {
+        transform: scale(0.9);
+      }
+    }
+  }
+}
+
+@keyframes activeDrawer {
+  from {
+    left: -25rem;
+  }
+  to {
+    left: 0;
+  }
+}
+
+@keyframes disabledDrawer {
+  from {
+    left: 0;
+  }
+  to {
+    opacity: 1;
+    left: -25rem;
+  }
+}
+
+@keyframes activeDrawerContent {
+  from {
+    background-color: transparent;
+    width: 100%;
+    height: 100vh;
+  }
+  to {
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(96, 97, 112, 0.16);
+  }
+}
+
+@keyframes disabledDrawerContent {
+  from {
+    background-color: rgba(96, 97, 112, 0.16);
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+  }
+  to {
+    opacity: 0;
+    background-color: transparent;
+    width: 0px;
+    height: 0px;
+  }
+}
