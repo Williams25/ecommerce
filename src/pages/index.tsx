@@ -1,31 +1,17 @@
 import { Header } from "components/Header";
 import { ProductGrid } from "components/ProductGrid";
-import type { GetServerSideProps } from "next";
-import { productService } from "services/products";
-import { Products } from "types/Products";
+import { ProductContext } from "context/ProductProvider";
+import { useContext } from "react";
 
-type HomePageProps = {
-  products: Products[];
-};
+const Home = () => {
+  const { products } = useContext(ProductContext);
 
-const Home = ({ products }: HomePageProps) => {
-  console.log(products);
   return (
     <div>
       <Header />
-      <ProductGrid />
+      <ProductGrid products={products} />
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const { data: products } = await productService.getAll();
-
-  return {
-    props: {
-      products
-    }
-  };
 };
 
 export default Home;
