@@ -1,4 +1,5 @@
-import { ProductCard } from "components/ProductCard";
+import { Header } from "components/Header";
+import { ProductGrid } from "components/ProductGrid";
 import type { GetServerSideProps } from "next";
 import { productService } from "services/products";
 import { Products } from "types/Products";
@@ -8,11 +9,11 @@ type HomePageProps = {
 };
 
 const Home = ({ products }: HomePageProps) => {
+  console.log(products);
   return (
     <div>
-      <h1>teste</h1>
-      {JSON.stringify(products)}
-      <ProductCard />
+      <Header />
+      <ProductGrid />
     </div>
   );
 };
