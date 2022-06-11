@@ -13,6 +13,7 @@
   border-radius: 0.55rem;
   transition: box-shadow 200ms ease 0s;
   z-index: 1;
+  overflow: hidden;
   &:hover {
     box-shadow: rgba(40, 41, 61, 0.04) 0px 4px 8px,
       rgba(96, 97, 112, 0.16) 0px 8px 16px;
@@ -37,12 +38,18 @@
     padding: 0.5rem;
 
     .imageBox {
+      width: 100% !important;
       & img {
         transition: transform 200ms ease 0s;
         width: 13.375rem !important;
         height: 8.25rem !important;
         object-fit: contain;
         user-select: none;
+
+        @media (max-width: 512px) {
+          max-width: 10rem;
+          min-width: 10rem;
+        }
       }
     }
 
