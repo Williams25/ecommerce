@@ -1,0 +1,74 @@
+.button {
+  border: 1px solid var(--orange-text);
+  border-radius: 0.55rem;
+  padding: 0.5em 1rem;
+  text-transform: uppercase;
+  transition: all 200ms linear;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button-buy {
+  color: var(--orange-text);
+
+  &:hover {
+    background-color: var(--orange-text);
+    color: var(--white);
+  }
+}
+
+.button-dark {
+  background-color: var(--orange-weak);
+  color: var(--white);
+
+  &:hover {
+    background-color: var(--orange-weak-100);
+    color: var(--white-weak);
+  }
+}
+
+.button-light {
+  background-color: var(--white);
+  color: var(--orange-weak);
+
+  &:hover {
+    background-color: var(--background-principal);
+    color: var(--orange-weak-100);
+  }
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.small {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  & svg {
+    font-size: 1rem;
+  }
+}
+
+.medium {
+  font-size: 0.975rem;
+  font-weight: 600;
+  line-height: 1.55;
+  & svg {
+    font-size: 1.125rem;
+  }
+}
+
+.large {
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.55;
+  & svg {
+    font-size: 1.325rem;
+  }
+}
