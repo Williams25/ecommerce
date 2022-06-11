@@ -4,6 +4,7 @@ import styled from "./styles.module.scss";
 import { MdShoppingCart } from "react-icons/md";
 import { Products } from "types/Products";
 import { formatCurrency } from "utils/currency";
+import { motion } from "framer-motion";
 
 export type ProductCardProps = Pick<
   Products,
@@ -17,7 +18,25 @@ export const ProductCard = ({
   oldPrice
 }: ProductCardProps) => {
   return (
-    <div className={styled.cardContainer}>
+    <motion.div
+      layout
+      animate={{
+        opacity: 1,
+        scale: 1
+      }}
+      initial={{
+        opacity: 0,
+        scale: 0
+      }}
+      exit={{
+        opacity: 0,
+        scale: 0
+      }}
+      transition={{
+        duration: 0.3
+      }}
+      className={styled.cardContainer}
+    >
       <div className={styled.boxProduct}>
         <div className={styled.imageBox}>
           <Image src={image} alt={name} width={368} height={368} />
@@ -43,6 +62,6 @@ export const ProductCard = ({
         fullWidth
         type="button"
       />
-    </div>
+    </motion.div>
   );
 };
