@@ -1,10 +1,11 @@
 import styled from "./styles.module.scss";
-import { RiSearch2Line } from "react-icons/ri";
 import { IoMenu } from "react-icons/io5";
 import { Button } from "components/Button";
 import { mockMenuItens } from "./mock";
 import { Drawer } from "components/Drawer";
 import { useDrawer } from "hooks/useDrawer";
+import { SearchBar } from "components/SearchBar";
+import { useSearch } from "hooks/useSearch";
 
 export type MenuItens = {
   title: string;
@@ -15,6 +16,9 @@ export type MenuItens = {
 
 export const Header = () => {
   const { isDrawer, toggleDrawer } = useDrawer();
+  const searchName = useSearch();
+  const searchCategorie = useSearch();
+
   return (
     <header className={styled.header}>
       <div className={styled.contentHeader}>
@@ -24,16 +28,12 @@ export const Header = () => {
           variant="button-dark"
         />
         <h1>OSF</h1>
-
-        <div className={styled.searchContent}>
-          <div className={styled.searchBar}>
-            <input type="text" placeholder="Busque aqui" />
-            <button type="button">
-              <RiSearch2Line />
-            </button>
-          </div>
-          {/* fazer o painel de busca */}
-        </div>
+        <SearchBar
+          handleSearch={searchName.handleSearch}
+          searchProduct={searchName.searchProduct}
+          setSearchProduct={searchName.setSearchProduct}
+          type="name"
+        />
       </div>
 
       <div className={styled.itemsMenu}>
@@ -49,6 +49,13 @@ export const Header = () => {
 
       <Drawer toggleDrawer={toggleDrawer} drawer={isDrawer}>
         <div className={styled.drawerItems}>
+          <SearchBar
+            handleSearch={searchCategorie.handleSearch}
+            searchProduct={searchCategorie.searchProduct}
+            setSearchProduct={searchCategorie.setSearchProduct}
+            type="categorie"
+          />
+
           {mockMenuItens.map((item) => (
             <Button
               key={item.link}
