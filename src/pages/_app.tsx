@@ -3,13 +3,20 @@ import type { AppProps } from "next/app";
 import { QueryClientProvider, Hydrate } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { queryClient } from "services/queryClient";
+import { ProductProvider } from "context/ProductProvider";
+import Head from "next/head";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <QueryClientProvider client={queryClient}>
+      <Head>
+        <title>Desafio OSF</title>
+      </Head>
       <ReactQueryDevtools initialIsOpen position="bottom-right" />
       <Hydrate state={pageProps.dehydratedState}>
-        <Component {...pageProps} />
+        <ProductProvider>
+          <Component {...pageProps} />
+        </ProductProvider>
       </Hydrate>
     </QueryClientProvider>
   );
