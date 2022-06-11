@@ -6,13 +6,13 @@
   justify-content: space-between;
 
   max-width: 14.5rem;
-  max-height: 22rem;
+  max-height: 22.5rem;
   min-width: 12.5rem;
-  min-height: 22rem;
+  min-height: 22.5rem;
   background-color: var(--white);
   border-radius: 0.55rem;
   transition: box-shadow 200ms ease 0s;
-
+  z-index: 1;
   &:hover {
     box-shadow: rgba(40, 41, 61, 0.04) 0px 4px 8px,
       rgba(96, 97, 112, 0.16) 0px 8px 16px;
@@ -23,6 +23,11 @@
         }
       }
     }
+  }
+
+  @media (max-width: 512px) {
+    max-width: 10rem;
+    min-width: 10rem;
   }
 
   .boxProduct {
