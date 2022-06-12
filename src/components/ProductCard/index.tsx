@@ -4,39 +4,27 @@ import styled from "./styles.module.scss";
 import { MdShoppingCart } from "react-icons/md";
 import { Products } from "types/Products";
 import { formatCurrency } from "utils/currency";
-import { motion } from "framer-motion";
+import { CartContext } from "context/CartProvider";
+import { useContext } from "react";
 
 export type ProductCardProps = Pick<
   Products,
-  "image" | "name" | "price" | "oldPrice"
+  "image" | "name" | "price" | "oldPrice" | "id" | "categorie" | "description"
 >;
 
 export const ProductCard = ({
   image,
   name,
   price,
-  oldPrice
+  oldPrice,
+  id,
+  categorie,
+  description
 }: ProductCardProps) => {
+  const { handleAddProductInCart } = useContext(CartContext);
+
   return (
-    <motion.div
-      layout
-      animate={{
-        opacity: 1,
-        scale: 1
-      }}
-      initial={{
-        opacity: 0,
-        scale: 0
-      }}
-      exit={{
-        opacity: 0,
-        scale: 0
-      }}
-      transition={{
-        duration: 0.3
-      }}
-      className={styled.cardContainer}
-    >
+    <div className={styled.cardContainer}>
       <div className={styled.boxProduct}>
         <div className={styled.imageBox}>
           <Image src={image} alt={name} width={368} height={368} />
@@ -61,7 +49,18 @@ export const ProductCard = ({
         positionIcon="left"
         fullWidth
         type="button"
+        onClick={() =>
+          handleAddProductInCart({
+            image,
+            name,
+            price,
+            oldPrice,
+            id,
+            categorie,
+            description
+          })
+        }
       />
-    </motion.div>
+    </div>
   );
 };
