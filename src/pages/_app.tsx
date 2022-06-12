@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import { queryClient } from "services/queryClient";
 import { ProductProvider } from "context/ProductProvider";
 import Head from "next/head";
+import { CartProvider } from "context/CartProvider";
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
@@ -15,7 +16,9 @@ const App = ({ Component, pageProps }: AppProps) => {
       <ReactQueryDevtools initialIsOpen position="bottom-right" />
       <Hydrate state={pageProps.dehydratedState}>
         <ProductProvider>
-          <Component {...pageProps} />
+          <CartProvider>
+            <Component {...pageProps} />
+          </CartProvider>
         </ProductProvider>
       </Hydrate>
     </QueryClientProvider>
