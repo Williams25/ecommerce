@@ -6,6 +6,9 @@ import { Drawer } from "components/Drawer";
 import { useDrawer } from "hooks/useDrawer";
 import { SearchBar } from "components/SearchBar";
 import { useSearch } from "hooks/useSearch";
+import { useContext } from "react";
+import { CartContext } from "context/CartProvider";
+import { MdShoppingCart } from "react-icons/md";
 
 export type MenuItens = {
   title: string;
@@ -18,6 +21,7 @@ export const Header = () => {
   const { isDrawer, toggleDrawer } = useDrawer();
   const searchName = useSearch();
   const searchCategorie = useSearch();
+  const { handleTotalProducts } = useContext(CartContext);
 
   return (
     <header className={styled.header}>
@@ -34,17 +38,23 @@ export const Header = () => {
           setSearchProduct={searchName.setSearchProduct}
           type="name"
         />
+        <button className={styled.buttonCart}>
+          {handleTotalProducts > 0 && <span>{handleTotalProducts}</span>}
+          <MdShoppingCart />
+        </button>
       </div>
 
-      <div className={styled.itemsMenu}>
-        {mockMenuItens.map((item) => (
-          <Button
-            key={item.link}
-            title={item.title}
-            variant="button-dark"
-            icon={item.icone}
-          />
-        ))}
+      <div className={styled.contentItemsMenu}>
+        <div className={styled.itemsMenu}>
+          {mockMenuItens.map((item) => (
+            <Button
+              key={item.link}
+              title={item.title}
+              variant="button-dark"
+              icon={item.icone}
+            />
+          ))}
+        </div>
       </div>
 
       <Drawer toggleDrawer={toggleDrawer} drawer={isDrawer}>
