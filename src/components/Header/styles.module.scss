@@ -1,14 +1,24 @@
 .header {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  background-color: var(--blue);
 
   .contentHeader {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: var(--blue);
-    padding: 0.5rem 1rem;
     gap: 1rem;
+    width: 100%;
+    max-width: 85rem;
+
+    @media (min-width: 768px) {
+      padding: 0.5rem 3rem;
+    }
+
+    padding: 0.5rem 1.5rem;
 
     & h1 {
       font-size: 1.5rem;
@@ -17,22 +27,67 @@
       color: var(--white);
       width: 3rem;
     }
-  }
 
-  .itemsMenu {
-    background-color: var(--orange-text);
-    padding: 0 1rem;
-    width: 100%;
+    & .buttonCart {
+      width: 2rem;
+      height: 2rem;
+      background-color: transparent;
+      border: 0;
+      position: relative;
 
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+      & span {
+        position: absolute;
+        top: -13px;
+        right: -13px;
+        width: 1.5rem;
+        height: 1.5rem;
+        color: var(--white);
+        background-color: var(--orange-text);
+        border-radius: 50%;
+        font-size: 0.775rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
 
-    @media (max-width: 900px) {
-      display: none;
+      & svg {
+        font-size: 2rem;
+        color: var(--white);
+      }
+
+      transition: filter 200ms ease-in-out;
+
+      &:hover {
+        filter: brightness(0.9);
+      }
     }
   }
 
+  .contentItemsMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--orange-text);
+    gap: 1rem;
+
+    .itemsMenu {
+      padding: 0 1rem;
+      width: 100%;
+      max-width: 85rem;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      gap: 1rem;
+
+      @media (max-width: 900px) {
+        display: none;
+      }
+    }
+  }
   .drawerItems {
     display: flex;
     gap: 1rem;
