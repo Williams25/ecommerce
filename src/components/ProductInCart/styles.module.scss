@@ -23,15 +23,30 @@
     justify-content: space-between;
     gap: 0.5rem;
 
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+
     .boxProduct {
       display: flex;
       flex-direction: row;
       gap: 0.5rem;
 
-      & img {
-        width: 6rem;
-        height: 6rem;
+      // @media (max-width: 600px) {
+      //   justify-content: center;
+      //   flex-direction: column;
+      //   width: 100%;
+      // }
+
+      .imageBox,
+      .imageBox img {
         margin-right: 0.5rem;
+        min-width: 120px !important;
+        max-width: 120px !important;
+        max-height: 98px !important;
+        min-height: 98px !important;
+
+        object-fit: contain;
       }
 
       .contentInfoCartProduct {
@@ -40,17 +55,17 @@
         align-items: center;
         justify-content: flex-start;
 
-        & h1 {
+        h1 {
           color: var(--filter-text);
           font-size: 0.875rem;
-          line-height: 1.125rem;
+          line-height: 1.3;
           font-weight: 600;
-          margin: 0.5rem 0 0;
           width: 100%;
           overflow: hidden;
           text-overflow: ellipsis;
           display: -webkit-box;
           -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
           -moz-box-orient: vertical;
           height: 3.375rem;
         }
