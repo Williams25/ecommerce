@@ -29,7 +29,9 @@ export const ProductInCart = ({
     <div className={styled.productIncart}>
       <div className={styled.productCartContainer}>
         <div className={styled.boxProduct}>
-          <Image src={image} alt={name} width={368} height={368} />
+          <div className={styled.imageBox}>
+            <Image src={image} alt={name} width={368} height={368} />
+          </div>
 
           <div className={styled.contentInfoCartProduct}>
             <h1>{name}</h1>
