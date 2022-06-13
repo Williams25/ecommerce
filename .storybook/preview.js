@@ -2,6 +2,7 @@ import "../src/styles/globals.scss";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { QueryClientProvider } from "react-query";
 import { ProductProvider } from "../src/context/ProductProvider";
+import { CartProvider } from "../src/context/CartProvider";
 import { queryClient } from "../src/services/queryClient";
 
 export const parameters = {
@@ -27,7 +28,9 @@ export const decorators = [
   (Story) => (
     <QueryClientProvider client={queryClient}>
       <ProductProvider>
-        <Story />
+        <CartProvider>
+          <Story />
+        </CartProvider>
       </ProductProvider>
     </QueryClientProvider>
   )
