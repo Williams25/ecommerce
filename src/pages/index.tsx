@@ -1,17 +1,11 @@
-import { Header } from "components/Header";
-import { ProductGrid } from "components/ProductGrid";
 import { ProductContext } from "context/ProductProvider";
 import { useContext } from "react";
+import { Home } from "layouts/Home";
 
-const Home = () => {
+const HomePage = () => {
   const { products } = useContext(ProductContext);
 
-  return (
-    <div>
-      <Header />
-      <ProductGrid products={products} />
-    </div>
-  );
+  return <Home products={products} />;
 };
 
-export default Home;
+export default HomePage;
