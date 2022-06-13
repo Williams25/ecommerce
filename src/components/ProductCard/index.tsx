@@ -6,6 +6,7 @@ import { Products } from "types/Products";
 import { formatCurrency } from "utils/currency";
 import { CartContext } from "context/CartProvider";
 import { useContext } from "react";
+import { useRouter } from "next/router";
 
 export type ProductCardProps = Pick<
   Products,
@@ -22,6 +23,7 @@ export const ProductCard = ({
   description
 }: ProductCardProps) => {
   const { handleAddProductInCart } = useContext(CartContext);
+  const router = useRouter();
 
   return (
     <div className={styled.cardContainer}>
@@ -49,7 +51,7 @@ export const ProductCard = ({
         positionIcon="left"
         fullWidth
         type="button"
-        onClick={() =>
+        onClick={() => {
           handleAddProductInCart({
             image,
             name,
@@ -58,8 +60,9 @@ export const ProductCard = ({
             id,
             categorie,
             description
-          })
-        }
+          });
+          router.push(`/pre-carrinho/${id}`);
+        }}
       />
     </div>
   );
