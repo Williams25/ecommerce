@@ -13,7 +13,7 @@ export const PreviousCart = ({ product }: PreviousCartProps) => {
   const router = useRouter();
 
   return (
-    <>
+    <div className={styled.containerPrevious}>
       <Header />
       <section className={styled.previousCart}>
         {product && <ProductInCart {...product} />}
@@ -27,6 +27,6 @@ export const PreviousCart = ({ product }: PreviousCartProps) => {
 
         <Button title="Ir para o carrinho" variant="button-dark" size="large" />
       </section>
-    </>
+    </div>
   );
 };
