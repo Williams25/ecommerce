@@ -35,7 +35,7 @@ export const SearchBar = ({ handleSearch, type = "name" }: SearchBarProps) => {
           </Combobox.Button>
         </div>
 
-        <Combobox.Options static className={styled.papper}>
+        <Combobox.Options className={styled.papper}>
           <div className={styled.resultItems}>
             {products.map((item) => (
               <Combobox.Option key={item.id} value={item.name}>
