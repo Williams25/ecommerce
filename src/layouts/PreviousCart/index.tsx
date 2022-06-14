@@ -16,7 +16,7 @@ export const PreviousCart = ({ product }: PreviousCartProps) => {
     <div className={styled.containerPrevious}>
       <Header />
       <section className={styled.previousCart}>
-        {product && <ProductInCart {...product} />}
+        {product && <ProductInCart product={product} type="pre-cart" />}
 
         <Button
           title="Continuar comprando"
@@ -25,7 +25,12 @@ export const PreviousCart = ({ product }: PreviousCartProps) => {
           onClick={() => router.back()}
         />
 
-        <Button title="Ir para o carrinho" variant="button-dark" size="large" />
+        <Button
+          title="Ir para o carrinho"
+          variant="button-dark"
+          size="large"
+          onClick={() => router.push("/carrinho")}
+        />
       </section>
     </div>
   );
