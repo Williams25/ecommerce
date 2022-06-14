@@ -1,13 +1,14 @@
 import {
   useState,
-  useEffect,
   createContext,
   ReactNode,
   Dispatch,
-  SetStateAction
+  SetStateAction,
+  useCallback,
+  useEffect
 } from "react";
+import { productService } from "services/products";
 import { Products } from "types/Products";
-import prod from "../../prod.json";
 
 export type ProductProviderData = {
   products: Products[];
@@ -23,8 +24,13 @@ export const ProductContext = createContext({} as ProductProviderData);
 export const ProductProvider = ({ children }: ProductProviderProps) => {
   const [products, setProducts] = useState<Products[]>([]);
 
+  const handleLoadProducts = useCallback(async () => {
+    const { data } = await productService.getAll();
+    setProducts(data);
+  }, []);
+
   useEffect(() => {
-    setProducts(prod);
+    handleLoadProducts();
   }, []);
 
   return (
