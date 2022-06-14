@@ -1,0 +1,42 @@
+.contentAddQuantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  & button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 0;
+    background: transparent;
+
+    svg {
+      font-size: 1.5rem;
+      color: var(--orange-strong);
+    }
+
+    &:hover {
+      svg {
+        color: var(--orange-weak);
+      }
+    }
+  }
+  .rowAddQuantity {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    & span {
+      font-size: 0.975rem;
+      font-weight: 600;
+      width: 1.5rem;
+      height: 1.5rem;
+      text-align: center;
+    }
+  }
+}
