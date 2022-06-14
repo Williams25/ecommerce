@@ -26,6 +26,8 @@
       line-height: 1.5;
       color: var(--white);
       width: 3rem;
+      cursor: pointer;
+      user-select: none;
     }
 
     & .buttonCart {
