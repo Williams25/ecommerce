@@ -5,20 +5,25 @@ import { formatCurrency } from "utils/currency";
 import { Button } from "components/Button";
 import styled from "./styles.module.scss";
 import classnames from "classnames";
+import { AddQuantityControl } from "components/AddQuantityControl";
+import { useProduct } from "hooks/useProduct";
 
-export type ProductInCartProps = Pick<
-  Products,
-  "image" | "name" | "price" | "categorie" | "description"
->;
+export type ProductInCartProps = {
+  type: "pre-cart" | "cart";
+  product: Products;
+};
 
 export const ProductInCart = ({
-  categorie,
-  description,
-  image,
-  name,
-  price
+  product,
+  type = "pre-cart"
 }: ProductInCartProps) => {
   const [showDescription, setShowDescription] = useState<boolean>(false);
+
+  const { onChangeQuantity, quantity, handleTopay, removeProduct } = useProduct(
+    {
+      product: { ...product }
+    }
+  );
 
   const toggleShowDescription = useCallback(
     () => setShowDescription((desc) => !desc),
@@ -30,27 +35,53 @@ export const ProductInCart = ({
       <div className={styled.productCartContainer}>
         <div className={styled.boxProduct}>
           <div className={styled.imageBox}>
-            <Image src={image} alt={name} width={368} height={368} />
+            <Image
+              src={product.image}
+              alt={product.name}
+              width={368}
+              height={368}
+            />
           </div>
 
           <div className={styled.contentInfoCartProduct}>
-            <h1>{name}</h1>
+            <h1>{product.name}</h1>
+            {type === "cart" && product.stock === quantity && (
+              <span>
+                Máximo de produtos em estoque atingidos limite ({product.stock})
+                itens
+              </span>
+            )}
           </div>
         </div>
 
         <div className={styled.contentFinalPrice}>
           <span>Apenas</span>
-          <h2>{formatCurrency(price)}</h2>
+          <h2>
+            {formatCurrency(
+              quantity > 0 && type === "cart" ? handleTopay : product.price
+            )}
+          </h2>
           <span>á vista</span>
+
+          {type === "cart" && (
+            <AddQuantityControl
+              onChangeQuantity={onChangeQuantity}
+              quantity={quantity}
+              removeProduct={removeProduct}
+              id={product.id}
+            />
+          )}
         </div>
       </div>
 
-      <Button
-        title="Detalhes"
-        variant="button-dark"
-        size="small"
-        onClick={toggleShowDescription}
-      />
+      <div className={styled["content-button"]}>
+        <Button
+          title="Detalhes"
+          variant="button-dark"
+          size="small"
+          onClick={toggleShowDescription}
+        />
+      </div>
 
       <div
         className={classnames(
@@ -61,8 +92,8 @@ export const ProductInCart = ({
       >
         {showDescription && (
           <>
-            <h3>Categoria - {categorie}</h3>
-            <p>{description}</p>
+            <h3>Categoria - {product.categorie}</h3>
+            <p>{product.description}</p>
           </>
         )}
       </div>
