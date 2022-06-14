@@ -16,10 +16,6 @@ export default {
     handleSearch(search, target?) {
       console.log(search, target);
     },
-    setSearchProduct(value) {
-      console.log(value);
-    },
-    searchProduct: "",
     type: "name"
   }
 } as Meta<SearchBarProps>;
