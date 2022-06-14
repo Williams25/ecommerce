@@ -7,4 +7,5 @@ export type Products = {
   categorie: string;
   description: string;
   quantity?: number;
+  stock: number;
 };
