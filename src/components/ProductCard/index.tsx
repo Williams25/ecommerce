@@ -7,10 +7,19 @@ import { formatCurrency } from "utils/currency";
 import { CartContext } from "context/CartProvider";
 import { useContext } from "react";
 import { useRouter } from "next/router";
+import { useProduct } from "hooks/useProduct";
 
 export type ProductCardProps = Pick<
   Products,
-  "image" | "name" | "price" | "oldPrice" | "id" | "categorie" | "description"
+  | "image"
+  | "name"
+  | "price"
+  | "oldPrice"
+  | "id"
+  | "categorie"
+  | "description"
+  | "quantity"
+  | "stock"
 >;
 
 export const ProductCard = ({
@@ -20,9 +29,22 @@ export const ProductCard = ({
   oldPrice,
   id,
   categorie,
-  description
+  description,
+  stock
 }: ProductCardProps) => {
   const { handleAddProductInCart } = useContext(CartContext);
+  const { quantity } = useProduct({
+    product: {
+      image,
+      name,
+      price,
+      oldPrice,
+      id,
+      categorie,
+      description,
+      stock
+    }
+  });
   const router = useRouter();
 
   return (
@@ -59,7 +81,9 @@ export const ProductCard = ({
             oldPrice,
             id,
             categorie,
-            description
+            description,
+            quantity,
+            stock
           });
           router.push(`/pre-carrinho/${id}`);
         }}
