@@ -1,6 +1,7 @@
 .containerProductSearch {
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
 
   cursor: pointer;
   width: 100%;
@@ -22,9 +23,10 @@
   gap: 0.5rem;
 
   .infoProductSearch {
+    width: 100%;
     h1 {
       margin: 0;
-      font-size: 0.875rem;
+      font-size: 0.875rem !important;
       color: var(--filter-text) !important;
       line-height: 1.3;
       font-weight: 600;
