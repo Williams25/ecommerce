@@ -1,11 +1,9 @@
 import { ProductContext } from "context/ProductProvider";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import { normalizeString } from "utils/normalizeString";
 import prod from "../../prod.json";
 
 export const useSearch = () => {
-  const [searchProduct, setSearchProduct] = useState<string>("");
-
   const { setProducts } = useContext(ProductContext);
 
   const handleSearch = useCallback(
@@ -21,12 +19,10 @@ export const useSearch = () => {
         setProducts(prod);
       }
     },
-    [searchProduct]
+    []
   );
 
   return {
-    handleSearch,
-    searchProduct,
-    setSearchProduct
+    handleSearch
   };
 };
