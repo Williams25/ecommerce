@@ -9,6 +9,7 @@ import { useSearch } from "hooks/useSearch";
 import { useContext } from "react";
 import { CartContext } from "context/CartProvider";
 import { MdShoppingCart } from "react-icons/md";
+import { useRouter } from "next/router";
 
 export type MenuItens = {
   title: string;
@@ -19,9 +20,12 @@ export type MenuItens = {
 
 export const Header = () => {
   const { isDrawer, toggleDrawer } = useDrawer();
+
   const searchName = useSearch();
   const searchCategorie = useSearch();
+
   const { handleTotalProducts } = useContext(CartContext);
+  const router = useRouter();
 
   return (
     <header className={styled.header}>
@@ -31,14 +35,12 @@ export const Header = () => {
           icon={<IoMenu />}
           variant="button-dark"
         />
-        <h1>OSF</h1>
-        <SearchBar
-          handleSearch={searchName.handleSearch}
-          searchProduct={searchName.searchProduct}
-          setSearchProduct={searchName.setSearchProduct}
-          type="name"
-        />
-        <button className={styled.buttonCart}>
+        <h1 onClick={() => router.push("/")}>OSF</h1>
+        <SearchBar handleSearch={searchName.handleSearch} type="name" />
+        <button
+          className={styled.buttonCart}
+          onClick={() => router.push("/carrinho")}
+        >
           {handleTotalProducts > 0 && <span>{handleTotalProducts}</span>}
           <MdShoppingCart />
         </button>
@@ -52,6 +54,7 @@ export const Header = () => {
               title={item.title}
               variant="button-dark"
               icon={item.icone}
+              onClick={() => router.push(item.link)}
             />
           ))}
         </div>
@@ -61,8 +64,6 @@ export const Header = () => {
         <div className={styled.drawerItems}>
           <SearchBar
             handleSearch={searchCategorie.handleSearch}
-            searchProduct={searchCategorie.searchProduct}
-            setSearchProduct={searchCategorie.setSearchProduct}
             type="categorie"
           />
 
@@ -73,7 +74,10 @@ export const Header = () => {
               variant="button-dark"
               icon={item.icone}
               fullWidth
-              onClick={() => toggleDrawer(false)}
+              onClick={() => {
+                toggleDrawer(false);
+                router.push(item.link);
+              }}
             />
           ))}
         </div>
