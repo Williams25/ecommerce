@@ -12,8 +12,11 @@ import { createSessionStorage } from "utils/session-storage";
 export type CartProviderData = {
   // eslint-disable-next-line no-unused-vars
   handleAddProductInCart: (product: Products) => void;
+  // eslint-disable-next-line no-unused-vars
+  removeProduct: (id: string) => void;
   productsCart: Products[];
   handleTotalProducts: number;
+  handleTopayOrder: number;
 };
 
 export type CartProviderProps = {
@@ -28,7 +31,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   const handleAddProductInCart = useCallback(
     (product: Products) => {
       const isProduct = productsCart.find((p) => p.id === product.id);
-
+      console.log(isProduct);
       if (isProduct) {
         const newCart = productsCart.filter((item) => {
           if (item.id === product.id) {
@@ -37,11 +40,18 @@ export const CartProvider = ({ children }: CartProviderProps) => {
 
           return item;
         });
-
         setProductsCart([...newCart]);
       } else {
         setProductsCart([...productsCart, { ...product, quantity: 1 }]);
       }
+    },
+    [productsCart]
+  );
+
+  const removeProduct = useCallback(
+    (id: string) => {
+      const removeProduct = productsCart.filter((product) => product.id !== id);
+      setProductsCart(removeProduct);
     },
     [productsCart]
   );
@@ -53,6 +63,13 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     );
   }, [productsCart]);
 
+  const handleTopayOrder = useMemo(() => {
+    return productsCart.reduce(
+      (previous, current) => previous + current.quantity! * current.price,
+      0
+    );
+  }, [productsCart]);
+
   useEffect(() => {
     productsCart && createSessionStorage(JSON.stringify(productsCart), "cart");
   }, [productsCart]);
@@ -60,9 +77,11 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   return (
     <CartContext.Provider
       value={{
+        removeProduct,
         handleAddProductInCart,
         productsCart,
-        handleTotalProducts
+        handleTotalProducts,
+        handleTopayOrder
       }}
     >
       {children}
