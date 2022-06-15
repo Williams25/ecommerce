@@ -1,6 +1,7 @@
 import { PreviousCart, PreviousCartProps } from "layouts/PreviousCart";
 import type { GetServerSideProps } from "next";
-import prod from "../../../prod.json";
+import { decoded } from "utils/base64";
+import { productService } from "services/products";
 
 const PreviousCartPage = ({ product }: PreviousCartProps) => {
   return <PreviousCart product={product} />;
@@ -14,8 +15,8 @@ export const getServerSideProps: GetServerSideProps<PreviousCartProps> = async (
   ctx
 ) => {
   const { slug } = ctx.params as Params;
-
-  const product = prod.find((prod) => prod.id === slug);
+  const { data } = await productService.getAll();
+  const product = data.find((prod) => prod.id === JSON.parse(decoded(slug)));
 
   if (!product) {
     return {
