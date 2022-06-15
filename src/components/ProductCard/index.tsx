@@ -8,6 +8,7 @@ import { CartContext } from "context/CartProvider";
 import { useContext } from "react";
 import { useRouter } from "next/router";
 import { useProduct } from "hooks/useProduct";
+import { encoded } from "utils/base64";
 
 export type ProductCardProps = Pick<
   Products,
@@ -85,7 +86,7 @@ export const ProductCard = ({
             quantity,
             stock
           });
-          router.push(`/pre-carrinho/${id}`);
+          router.push(`/pre-carrinho/${encoded(id)}`);
         }}
       />
     </div>
