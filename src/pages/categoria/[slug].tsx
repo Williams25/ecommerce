@@ -46,6 +46,12 @@ export const getStaticProps: GetStaticProps<CategoriePageProps> = async (
 
   const products = data.filter((p) => p.categorie === slug);
 
+  if (products.length === 0) {
+    return {
+      notFound: true
+    };
+  }
+
   return {
     props: {
       products
