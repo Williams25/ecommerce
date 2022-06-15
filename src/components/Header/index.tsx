@@ -36,7 +36,9 @@ export const Header = () => {
           variant="button-dark"
         />
         <h1 onClick={() => router.push("/")}>OSF</h1>
-        <SearchBar handleSearch={searchName.handleSearch} type="name" />
+        <div className={styled.searchBarDesktop}>
+          <SearchBar handleSearch={searchName.handleSearch} type="name" />
+        </div>
         <button
           className={styled.buttonCart}
           onClick={() => router.push("/carrinho")}
@@ -58,6 +60,10 @@ export const Header = () => {
             />
           ))}
         </div>
+      </div>
+
+      <div className={styled.searchBarMobile}>
+        <SearchBar handleSearch={searchName.handleSearch} type="name" />
       </div>
 
       <Drawer toggleDrawer={toggleDrawer} drawer={isDrawer}>
