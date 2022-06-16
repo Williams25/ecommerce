@@ -4,6 +4,7 @@ import { Button } from "components/Button";
 import { useEffect, useState } from "react";
 import { Coupon } from "types/Coupon";
 import { getSessionStorage } from "utils/session-storage";
+import { supJsonParse } from "utils/sup-jsonparse";
 
 export type CheckOrderProps = {
   order: {
@@ -15,18 +16,20 @@ export type CheckOrderProps = {
   // eslint-disable-next-line no-unused-vars
   verifyCoupon: (coupon: string) => void;
   activeCoupons: Coupon | null;
+  handleFinishPurchase: () => void;
 };
 
 export const CheckOrder = ({
   order,
   verifyCoupon,
-  activeCoupons
+  activeCoupons,
+  handleFinishPurchase
 }: CheckOrderProps) => {
   const [couponText, setCouponText] = useState<string>("");
 
   useEffect(() => {
     const activeCoupon = getSessionStorage("active-coupon");
-    activeCoupon && setCouponText(JSON.parse(activeCoupon));
+    activeCoupon && setCouponText(supJsonParse(activeCoupon));
   }, []);
 
   return (
@@ -87,6 +90,8 @@ export const CheckOrder = ({
         title="Finalizar Compra"
         variant="button-dark"
         size="medium"
+        onClick={handleFinishPurchase}
+        type="button"
       />
     </div>
   );
