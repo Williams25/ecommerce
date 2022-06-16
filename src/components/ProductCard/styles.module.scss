@@ -38,6 +38,7 @@
     padding: 0.5rem;
 
     .imageBox {
+      cursor: pointer;
       width: 100% !important;
       & img {
         transition: transform 200ms ease 0s;
@@ -74,6 +75,7 @@
         -webkit-box-orient: vertical;
         -moz-box-orient: vertical;
         height: 3.375rem;
+        cursor: pointer;
       }
 
       & h2 {
