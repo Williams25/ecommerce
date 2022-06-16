@@ -25,6 +25,9 @@ export default {
       discount: 30,
       name: "50%OFF",
       id: 1
+    },
+    handleFinishPurchase() {
+      console.log("handleFinishPurchase");
     }
   }
 } as Meta<CheckOrderProps>;
