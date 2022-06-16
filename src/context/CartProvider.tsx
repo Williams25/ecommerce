@@ -13,6 +13,7 @@ import {
   removeItemSessionStorage
 } from "utils/session-storage";
 import { productService } from "services/products";
+import { useRouter } from "next/router";
 
 export type CartProviderData = {
   // eslint-disable-next-line no-unused-vars
@@ -25,6 +26,8 @@ export type CartProviderData = {
   handleTotalProducts: number;
   handleTopayOrder: number;
   activeCoupons: Coupon | null;
+  coupons: Coupon[];
+  handleFinishPurchase: () => void;
 };
 
 export type CartProviderProps = {
@@ -37,6 +40,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   const [productsCart, setProductsCart] = useState<Products[]>([]);
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [activeCoupons, setActiveCoupons] = useState<Coupon | null>(null);
+
+  const router = useRouter();
 
   const handleAddProductInCart = useCallback(
     (product: Products) => {
@@ -95,6 +100,14 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       : removeItemSessionStorage("active-coupon");
   };
 
+  const handleFinishPurchase = useCallback(() => {
+    router.push("/compra-finalizada");
+    removeItemSessionStorage("active-coupon");
+    removeItemSessionStorage("cart");
+
+    setProductsCart([]);
+  }, [productsCart, activeCoupons]);
+
   useEffect(() => {
     productsCart && createSessionStorage(JSON.stringify(productsCart), "cart");
   }, [productsCart]);
@@ -112,7 +125,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         handleTotalProducts,
         handleTopayOrder,
         activeCoupons,
-        verifyCoupon
+        verifyCoupon,
+        coupons,
+        handleFinishPurchase
       }}
     >
       {children}
