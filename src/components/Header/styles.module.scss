@@ -32,10 +32,10 @@
     gap: 1rem;
     width: 100%;
     max-width: 85rem;
+    padding: 0 1rem;
 
     @media (max-width: 600px) {
       justify-content: space-between;
-      padding: 0 1rem;
     }
 
     @media (min-width: 768px) {
