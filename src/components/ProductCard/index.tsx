@@ -51,11 +51,14 @@ export const ProductCard = ({
   return (
     <div className={styled.cardContainer}>
       <div className={styled.boxProduct}>
-        <div className={styled.imageBox}>
+        <div
+          className={styled.imageBox}
+          onClick={() => router.push(`/produto/${encoded(id)}`)}
+        >
           <Image src={image} alt={name} width={368} height={368} />
         </div>
         <div className={styled.info}>
-          <h1>{name}</h1>
+          <h1 onClick={() => router.push(`/produto/${encoded(id)}`)}>{name}</h1>
           {!!oldPrice && (
             <span className={styled.oldPriceCard}>
               {formatCurrency(oldPrice)}
