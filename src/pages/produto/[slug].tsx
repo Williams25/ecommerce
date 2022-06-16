@@ -1,6 +1,6 @@
 import { DetailsProduct, DetailsProductProps } from "layouts/DetailsProduct";
-import type { GetServerSideProps } from "next";
-import { decoded } from "utils/base64";
+import type { GetStaticProps, GetStaticPaths } from "next";
+import { decoded, encoded } from "utils/base64";
 import { productService } from "services/products";
 import { supJsonParse } from "utils/sup-jsonparse";
 
@@ -12,9 +12,26 @@ export type Params = {
   slug: string;
 };
 
-export const getServerSideProps: GetServerSideProps<
-  DetailsProductProps
-> = async (ctx) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const { data } = await productService.getAll();
+
+  const paths = data.map((p) => {
+    return {
+      params: {
+        slug: encoded(p.id)
+      }
+    };
+  });
+
+  return {
+    paths,
+    fallback: "blocking"
+  };
+};
+
+export const getStaticProps: GetStaticProps<DetailsProductProps> = async (
+  ctx
+) => {
   const { slug } = ctx.params as Params;
   const { data } = await productService.getAll();
   const product = data.find((prod) => prod.id === supJsonParse(decoded(slug)));
@@ -28,7 +45,8 @@ export const getServerSideProps: GetServerSideProps<
   return {
     props: {
       product
-    }
+    },
+    revalidate: 200
   };
 };
 
