@@ -9,19 +9,29 @@
     padding: 0 1rem;
     max-width: 79.375rem;
     gap: 2rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "previousProduct contentButtons";
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "previousProduct" "contentButtons";
+    }
+  }
+
+  .previousProduct {
+    grid-area: previousProduct;
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-start;
-
-    @media (max-width: 850px) {
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 600px) {
-      justify-content: center;
-    }
+    flex-direction: column;
+  }
+  .contentButtons {
+    grid-area: contentButtons;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
   }
 }
