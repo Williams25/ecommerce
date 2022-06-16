@@ -34,6 +34,7 @@
 
       .imageBox,
       .imageBox img {
+        cursor: pointer;
         margin-right: 0.5rem;
         min-width: 120px !important;
         max-width: 120px !important;
@@ -69,6 +70,7 @@
           -webkit-box-orient: vertical;
           -moz-box-orient: vertical;
           height: 3.375rem;
+          cursor: pointer;
         }
       }
     }
