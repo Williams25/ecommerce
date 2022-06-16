@@ -12,6 +12,7 @@ import { Products } from "types/Products";
 
 export type ProductProviderData = {
   products: Products[];
+  productsCopy: Products[];
   setProducts: Dispatch<SetStateAction<Products[]>>;
 };
 
@@ -23,10 +24,12 @@ export const ProductContext = createContext({} as ProductProviderData);
 
 export const ProductProvider = ({ children }: ProductProviderProps) => {
   const [products, setProducts] = useState<Products[]>([]);
+  const [productsCopy, setProductsCopy] = useState<Products[]>([]);
 
   const handleLoadProducts = useCallback(async () => {
     const { data } = await productService.getAll();
     setProducts(data);
+    setProductsCopy(data);
   }, []);
 
   useEffect(() => {
@@ -34,7 +37,7 @@ export const ProductProvider = ({ children }: ProductProviderProps) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products, setProducts }}>
+    <ProductContext.Provider value={{ products, setProducts, productsCopy }}>
       {children}
     </ProductContext.Provider>
   );
