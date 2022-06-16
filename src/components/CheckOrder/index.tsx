@@ -1,8 +1,9 @@
 import styled from "./styles.module.scss";
 import { formatCurrency } from "utils/currency";
 import { Button } from "components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Coupon } from "types/Coupon";
+import { getSessionStorage } from "utils/session-storage";
 
 export type CheckOrderProps = {
   order: {
@@ -22,6 +23,12 @@ export const CheckOrder = ({
   activeCoupons
 }: CheckOrderProps) => {
   const [couponText, setCouponText] = useState<string>("");
+
+  useEffect(() => {
+    const activeCoupon = getSessionStorage("active-coupon");
+    activeCoupon && setCouponText(JSON.parse(activeCoupon));
+  }, []);
+
   return (
     <div className={styled.checkOrderContent}>
       <h1>Resumo do pedido</h1>
@@ -45,7 +52,11 @@ export const CheckOrder = ({
           Valor total:{" "}
           <span>
             {formatCurrency(
-              order.discount ? order.toPay - order.discount : order.toPay
+              order.discount && order.toPay < 1000
+                ? order.toPay - order.discount + 10
+                : order.discount
+                ? order.toPay - order.discount
+                : order.toPay
             )}
           </span>
         </li>
