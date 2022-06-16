@@ -8,7 +8,7 @@ export const Purchase = () => {
       <Header />
 
       <div className={styled.contentPurchase}>
-        <h1>Compra finalazada com sucesso</h1>
+        <h1>Compra finalizada com sucesso</h1>
 
         <Link href="/">
           <a>Voltar para home</a>
