@@ -86,6 +86,8 @@ export const CartProvider = ({ children }: CartProviderProps) => {
       (c) => c.name.trim().toLowerCase() === coupon.trim().toLowerCase()
     );
     setActiveCoupons(verify ? verify : null);
+
+    verify && createSessionStorage(verify.name, "active-coupon");
   };
 
   useEffect(() => {
