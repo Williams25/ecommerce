@@ -6,17 +6,22 @@ import {
   useCallback,
   useMemo
 } from "react";
+import { Coupon } from "types/Coupon";
 import { Products } from "types/Products";
 import { createSessionStorage } from "utils/session-storage";
+import { productService } from "services/products";
 
 export type CartProviderData = {
   // eslint-disable-next-line no-unused-vars
   handleAddProductInCart: (product: Products) => void;
   // eslint-disable-next-line no-unused-vars
   removeProduct: (id: string) => void;
+  // eslint-disable-next-line no-unused-vars
+  verifyCoupon: (coupon: string) => void;
   productsCart: Products[];
   handleTotalProducts: number;
   handleTopayOrder: number;
+  activeCoupons: Coupon | null;
 };
 
 export type CartProviderProps = {
@@ -27,11 +32,12 @@ export const CartContext = createContext({} as CartProviderData);
 
 export const CartProvider = ({ children }: CartProviderProps) => {
   const [productsCart, setProductsCart] = useState<Products[]>([]);
+  const [coupons, setCoupons] = useState<Coupon[]>([]);
+  const [activeCoupons, setActiveCoupons] = useState<Coupon | null>(null);
 
   const handleAddProductInCart = useCallback(
     (product: Products) => {
       const isProduct = productsCart.find((p) => p.id === product.id);
-      console.log(isProduct);
       if (isProduct) {
         const newCart = productsCart.filter((item) => {
           if (item.id === product.id) {
@@ -70,9 +76,25 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     );
   }, [productsCart]);
 
+  const handleLoadCoupons = useCallback(async () => {
+    const { data } = await productService.getAllCoupons();
+    setCoupons(data);
+  }, [coupons]);
+
+  const verifyCoupon = (coupon: string) => {
+    const verify = coupons.find(
+      (c) => c.name.trim().toLowerCase() === coupon.trim().toLowerCase()
+    );
+    setActiveCoupons(verify ? verify : null);
+  };
+
   useEffect(() => {
     productsCart && createSessionStorage(JSON.stringify(productsCart), "cart");
   }, [productsCart]);
+
+  useEffect(() => {
+    handleLoadCoupons();
+  }, []);
 
   return (
     <CartContext.Provider
@@ -81,7 +103,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
         handleAddProductInCart,
         productsCart,
         handleTotalProducts,
-        handleTopayOrder
+        handleTopayOrder,
+        activeCoupons,
+        verifyCoupon
       }}
     >
       {children}
