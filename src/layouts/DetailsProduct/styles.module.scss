@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  .contentDetailsProducts {
+    padding: 0 1rem;
+    margin: 2rem 0;
+    max-width: 79.375rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
