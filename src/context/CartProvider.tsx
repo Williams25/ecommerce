@@ -8,7 +8,10 @@ import {
 } from "react";
 import { Coupon } from "types/Coupon";
 import { Products } from "types/Products";
-import { createSessionStorage } from "utils/session-storage";
+import {
+  createSessionStorage,
+  removeItemSessionStorage
+} from "utils/session-storage";
 import { productService } from "services/products";
 
 export type CartProviderData = {
@@ -87,7 +90,9 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     );
     setActiveCoupons(verify ? verify : null);
 
-    verify && createSessionStorage(verify.name, "active-coupon");
+    verify
+      ? createSessionStorage(verify.name, "active-coupon")
+      : removeItemSessionStorage("active-coupon");
   };
 
   useEffect(() => {
