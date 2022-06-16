@@ -7,7 +7,8 @@ import styled from "./styles.module.scss";
 import classnames from "classnames";
 import { AddQuantityControl } from "components/AddQuantityControl";
 import { useProduct } from "hooks/useProduct";
-
+import { useRouter } from "next/router";
+import { encoded } from "utils/base64";
 export type ProductInCartProps = {
   type: "pre-cart" | "cart";
   product: Products;
@@ -18,6 +19,7 @@ export const ProductInCart = ({
   type = "pre-cart"
 }: ProductInCartProps) => {
   const [showDescription, setShowDescription] = useState<boolean>(false);
+  const router = useRouter();
 
   const { onChangeQuantity, quantity, handleTopay, removeProduct } = useProduct(
     {
@@ -34,7 +36,10 @@ export const ProductInCart = ({
     <div className={styled.productIncart}>
       <div className={styled.productCartContainer}>
         <div className={styled.boxProduct}>
-          <div className={styled.imageBox}>
+          <div
+            className={styled.imageBox}
+            onClick={() => router.push(`/produto/${encoded(product.id)}`)}
+          >
             <Image
               src={product.image}
               alt={product.name}
@@ -44,7 +49,9 @@ export const ProductInCart = ({
           </div>
 
           <div className={styled.contentInfoCartProduct}>
-            <h1>{product.name}</h1>
+            <h1 onClick={() => router.push(`/produto/${encoded(product.id)}`)}>
+              {product.name}
+            </h1>
             {type === "cart" && product.stock === quantity && (
               <span>
                 Máximo de produtos em estoque atingidos limite ({product.stock})
