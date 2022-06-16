@@ -15,7 +15,7 @@ export default {
     }
   },
   args: {
-    products: [prod[0]]
+    product: { ...prod[0] }
   }
 } as Meta<PreviousCartProps>;
 
