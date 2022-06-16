@@ -1,0 +1,84 @@
+.contentProductDetails {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: "imageBox contentInfo";
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: "imageBox" "contentInfo";
+  }
+
+  .imageBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    grid-area: imageBox;
+    width: 100%;
+
+    & img {
+      max-width: 250px !important;
+      min-width: 250px !important;
+      min-height: 250px !important;
+      max-height: 250px !important;
+    }
+  }
+
+  .contentInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.5rem;
+    grid-area: contentInfo;
+
+    & h1,
+    & h2,
+    & p {
+      margin: 0;
+      padding: 0;
+      color: var(--filter-text);
+    }
+
+    & h1 {
+      font-size: 1.525rem;
+      line-height: 1.8rem;
+      font-weight: 600;
+    }
+
+    & h2 {
+      font-size: 1rem;
+      line-height: 1.125rem;
+      font-weight: 600;
+    }
+
+    & .price {
+      font-size: 1.75rem;
+      line-height: 1.125rem;
+      font-weight: 700;
+      color: var(--orange-text);
+    }
+
+    & .oldPriceCard {
+      margin: 0.5rem 0 0;
+      font-size: 1.125rem;
+      line-height: 1rem;
+      font-weight: 400;
+      height: 1rem;
+      text-decoration-line: line-through;
+      text-decoration-style: solid;
+      text-decoration-color: currentcolor;
+      text-decoration-thickness: revert;
+      color: var(--text-grey-weak);
+    }
+
+    p {
+      padding: 1rem;
+      color: var(--text-grey-mid);
+      font-size: 0.775rem;
+      line-height: 1.225rem;
+      font-weight: 600;
+    }
+  }
+}
