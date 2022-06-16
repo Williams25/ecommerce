@@ -4,6 +4,7 @@ import { Params } from "pages/pre-carrinho/[slug]";
 import { productService } from "services/products";
 import { Products } from "types/Products";
 import { decoded } from "utils/base64";
+import { supJsonParse } from "utils/sup-jsonparse";
 
 export type SearchPageProps = {
   products: Products[];
@@ -24,7 +25,7 @@ export const getServerSideProps: GetServerSideProps<SearchPageProps> = async (
   const { data } = await productService.getAll();
 
   const products: Products[] = [];
-  const slugProducts = JSON.parse(decoded(slug)) as string[];
+  const slugProducts = supJsonParse(decoded(slug)) as string[];
 
   for (let i = 0; i < slugProducts.length; i++) {
     const filter = data.filter((p) => p.id === slugProducts[i]);
