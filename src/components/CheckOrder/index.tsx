@@ -51,9 +51,9 @@ export const CheckOrder = ({
               : formatCurrency(10)}
           </span>
         </li>
-        {order.discount && (
+        {order.discount && order.discount > 0 && (
           <li>
-            Valor de desconto: <span>{formatCurrency(order.discount)}</span>
+            Valor do desconto: <span>{formatCurrency(order.discount)}</span>
           </li>
         )}
         <li>
