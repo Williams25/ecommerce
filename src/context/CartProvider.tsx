@@ -109,7 +109,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
   }, [productsCart, activeCoupons]);
 
   useEffect(() => {
-    productsCart && createSessionStorage(JSON.stringify(productsCart), "cart");
+    createSessionStorage(JSON.stringify(productsCart), "cart");
   }, [productsCart]);
 
   useEffect(() => {
