@@ -106,6 +106,7 @@ export const CartProvider = ({ children }: CartProviderProps) => {
     removeItemSessionStorage("cart");
 
     setProductsCart([]);
+    setActiveCoupons(null);
   }, [productsCart, activeCoupons]);
 
   useEffect(() => {
