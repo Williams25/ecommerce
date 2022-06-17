@@ -1,7 +1,9 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export const useDrawer = () => {
   const [isDrawer, setIsDrawer] = useState<boolean>(false);
+  const router = useRouter();
 
   const toggleDrawer = useCallback(
     (toggle: boolean) => {
@@ -15,8 +17,12 @@ export const useDrawer = () => {
         document?.getElementById("body")?.classList.add("scroll");
       }
     },
-    [isDrawer]
+    [isDrawer, router.asPath]
   );
+
+  useEffect(() => {
+    toggleDrawer(false);
+  }, [router.asPath]);
 
   return {
     toggleDrawer,
