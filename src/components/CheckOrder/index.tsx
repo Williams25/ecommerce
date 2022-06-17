@@ -51,6 +51,11 @@ export const CheckOrder = ({
               : formatCurrency(10)}
           </span>
         </li>
+        {order.discount && (
+          <li>
+            Valor de desconto: <span>{formatCurrency(order.discount)}</span>
+          </li>
+        )}
         <li>
           Valor total:{" "}
           <span>
