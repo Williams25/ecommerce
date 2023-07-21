@@ -1,4 +1,4 @@
-# Desafio OSF
+# Ecommerce
 
 ## :dart: Tecnologias
 
