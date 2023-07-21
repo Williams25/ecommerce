@@ -35,7 +35,7 @@ export const Header = () => {
           icon={<IoMenu />}
           variant="button-dark"
         />
-        <h1 onClick={() => router.push("/")}>OSF</h1>
+        <h1 onClick={() => router.push("/")}>Ecommerce</h1>
         <div className={styled.searchBarDesktop}>
           <SearchBar handleSearch={searchName.handleSearch} type="name" />
         </div>
