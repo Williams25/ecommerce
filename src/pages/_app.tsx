@@ -8,7 +8,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
-        <title>Desafio OSF</title>
+        <title>Ecommerce</title>
       </Head>
       <ProductProvider>
         <CartProvider>
